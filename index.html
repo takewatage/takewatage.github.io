@@ -11,14 +11,13 @@
 </head>
 <body>
 <div id="app">
-
     <div class="box" v-cloak>
-        <div class="result" v-if="monster">
+        <div class="result" :class="{'start': isStart}">
             <img :src="monster.src" />
             <h2>{{monster.name}}</h2>
         </div>
 
-        <a class="btn btn-gradient" @click="start"><span>スタート</span></a>
+        <a class="btn btn-gradient" @click="start"><span>{{this.isStart?  'ストップ': 'スタート'}}</span></a>
     </div>
 </div>
 </body>
@@ -29,7 +28,8 @@
         el: '#app',
         data() {
             return {
-                monster: null,
+                isStart: false,
+                monster: { name: " ",  src: "hatena.png" },
                 monsters: [
                     { name: "アオアシラ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/Ru6YCV1Q.jpg" },
                     { name: "アケノシルム",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/oyXbYq86.jpg" },
@@ -81,8 +81,23 @@
             }
         },
         methods: {
-            start() {
-                this.monster = this.monsters[Math.floor(Math.random() * this.monsters.length)]
+            async start() {
+                this.isStart = !this.isStart
+                if(this.isStart) {
+                    this.monster = { name: " ",  src: "hatena.png" }
+                }else {
+                    this.monster = this.monsters[Math.floor(Math.random() * this.monsters.length)]
+                }
+            },
+            randomMonster() {
+                if(this.isStart) {
+                    setTimeout(() => {
+                        if(!this.isStart) return
+                        this.monster = this.monsters[Math.floor(Math.random() * this.monsters.length)]
+                        return this.randomMonster()
+                    }, 500)
+                }
+                return
             }
         }
     })
@@ -92,6 +107,25 @@
 <style lang="css">
     .result {
         text-align: center;
+        transform: rotateY(
+            0deg
+        );
+        transition: all 3s ease-in;
+    }
+    .result.start {
+        animation: rotate 0.1s infinite;
+    }
+    @keyframes rotate {
+        0% {
+            transform: rotateY(
+                0deg
+            );
+        }
+        100% {
+            transform: rotateY(
+                360deg
+            );
+        }
     }
     img {
         width: 154px;
