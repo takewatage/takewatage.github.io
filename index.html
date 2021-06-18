@@ -6,11 +6,127 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>
-    gonzouuuuuuuuuuuuu
-</h1>
+<div id="app">
 
+    <div class="box" v-cloak>
+        <div class="result" v-if="monster">
+            <img :src="monster.src" />
+            <h2>{{monster.name}}</h2>
+        </div>
+
+        <a class="btn btn-gradient" @click="start"><span>スタート</span></a>
+    </div>
+</div>
 </body>
 </html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                monster: null,
+                monsters: [
+                    { name: "アオアシラ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/Ru6YCV1Q.jpg" },
+                    { name: "アケノシルム",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/oyXbYq86.jpg" },
+                    { name: "アンジャナフ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/xy0BPPVt.jpg" },
+                    { name: "イソネミクニ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/hWD6fj55.jpg" },
+                    { name: "イブシマキヒコ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/t1LcDmQl.jpg" },
+                    { name: "ウルクスス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/6H9MhDXk.jpg" },
+                    { name: "オオナズチ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/ksh2cWDk.jpg" },
+                    { name: "オサイズチ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/psHtPEXW.jpg" },
+                    { name: "オロミドロ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/hu4MI5zw.jpg" },
+                    { name: "クシャルダオラ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/b2MvkDyp.jpg" },
+                    { name: "クルルヤック",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/LtnwO5ZT.jpg" },
+                    { name: "ゴシャハギ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/bDLd5Y7j.jpg" },
+                    { name: "ジュラトドス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/6qSJA40O.jpg" },
+                    { name: "ジンオウガ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/dQzXW1Zl.jpg" },
+                    { name: "タマミツネ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/MIfJpV5P.jpg" },
+                    { name: "ディアブロス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/4i19ewjq.jpg" },
+                    { name: "ティガレックス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/I6zb5F5n.jpg" },
+                    { name: "テオ・テスカトル",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/Rm941I5I.jpg" },
+                    { name: "ドスバギィ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/9m5AnF1L.jpg" },
+                    { name: "ドスフロギィ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/K5vRfrIe.jpg" },
+                    { name: "トビカガチ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/2nWzcJDk.jpg" },
+                    { name: "ナルガクルガ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/RRzfmO2O.jpg" },
+                    { name: "ナルハタタヒメ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/m9J7rbig.jpg" },
+                    { name: "ヌシ・アオアシラ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/BVVNyPAu.jpg" },
+                    { name: "ヌシ・ジンオウガ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/AKNd41kS.jpg" },
+                    { name: "ヌシ・タマミツネ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/6eopUHoT.jpg" },
+                    { name: "ヌシ・ディアブロス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/YrZBvG7H.jpg" },
+                    { name: "ヌシ・リオレイア",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/hnFzdSuL.jpg" },
+                    { name: "ヌシ・リオレウス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/FiaMC7Pt.jpg" },
+                    { name: "バサルモス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/oWfxDY4K.jpg" },
+                    { name: "バゼルギウス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/KiZcQExG.jpg" },
+                    { name: "バルファルク",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/BEUCHB7h.jpg" },
+                    { name: "ビシュテンゴ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/7CSpiMZM.jpg" },
+                    { name: "プケプケ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/ZahrNQ4i.jpg" },
+                    { name: "フルフル",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/iUGPblOf.jpg" },
+                    { name: "ベリオロス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/PHyt50VZ.jpg" },
+                    { name: "ボルボロス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/Atf3EtsZ.jpg" },
+                    { name: "マガイマガド",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/FwEnWC6x.jpg" },
+                    { name: "ヤツカダキ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/05CBx4oN.jpg" },
+                    { name: "ヨツミワドウ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/9mrnlKQq.jpg" },
+                    { name: "ラージャン",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/OTsUzYUX.jpg" },
+                    { name: "ラングロトラ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/OLOsYAVr.jpg" },
+                    { name: "リオレイア",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/ZnFlCIeK.jpg" },
+                    { name: "リオレウス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/ymBRJ3hh.jpg" },
+                    { name: "ロアルドロス",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/9Y42grcM.jpg" },
+                    { name: "百竜ノ淵源ナルハタタヒメ",  src: "https://cdn.gamerch.com/contents/wiki/1659/entry/wiGUqRcA.jpg" }
+                ]
+            }
+        },
+        methods: {
+            start() {
+                this.monster = this.monsters[Math.floor(Math.random() * this.monsters.length)]
+            }
+        }
+    })
+
+</script>
+
+<style lang="css">
+    .result {
+        text-align: center;
+    }
+    img {
+        width: 154px;
+
+    }
+
+    .box {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    [v-cloak] {
+        display: none;
+    }
+    a.btn-gradient {
+        font-size: 40px;
+        padding: 10px 50px;
+        cursor: pointer;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 0;
+        background-image: -webkit-gradient(linear, left top, right top, from(#fa709a), to(#fee140));
+        background-image: -webkit-linear-gradient(left, #fa709a 0%, #fee140 100%);
+        background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+    }
+
+    a.btn-gradient:hover {
+        -webkit-transform: translate(0, -2px);
+        transform: translate(0, -2px);
+        color: #fff;
+        -webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, .2);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, .2);
+    }
+</style>
