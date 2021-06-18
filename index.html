@@ -85,6 +85,7 @@
                 this.isStart = !this.isStart
                 if(this.isStart) {
                     this.monster = { name: " ",  src: "hatena.png" }
+                    this.randomMonster()
                 }else {
                     this.monster = this.monsters[Math.floor(Math.random() * this.monsters.length)]
                 }
@@ -93,9 +94,9 @@
                 if(this.isStart) {
                     setTimeout(() => {
                         if(!this.isStart) return
-                        this.monster = this.monsters[Math.floor(Math.random() * this.monsters.length)]
+                        this.monster.name = this.monsters[Math.floor(Math.random() * this.monsters.length)].name
                         return this.randomMonster()
-                    }, 500)
+                    }, 100)
                 }
                 return
             }
